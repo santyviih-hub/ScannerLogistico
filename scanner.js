@@ -1,5 +1,6 @@
 let html5QrCode;
 let escaneando = false;
+let bloqueado = false;
 
 const btnCamera = document.getElementById("btnCamera");
 const resultado = document.getElementById("resultado");
@@ -16,7 +17,7 @@ async function iniciarScanner() {
         html5QrCode = new Html5Qrcode("reader");
 
         await html5QrCode.start(
-            { facingMode: "environment" }, // 📱 câmera traseira (iPhone + Android)
+            { facingMode: "environment" }, // câmera traseira (iPhone + Android)
             {
                 fps: 10,
                 qrbox: 250
@@ -36,24 +37,31 @@ async function iniciarScanner() {
 
 function processarCodigo(codigo) {
 
-    // mostra na tela
+    if (bloqueado) return; // 🔥 impede múltiplas leituras seguidas
+
+    bloqueado = true;
+
     resultado.innerText = codigo;
 
-    // contador
     contador++;
     contadorEl.innerText = contador;
 
-    // som de confirmação
+    // 🔊 som de sucesso
     let beep = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
     beep.play();
 
-    // vibração (Android / alguns iPhones)
+    // 📳 vibração (Android / iPhone compatível)
     if (navigator.vibrate) {
         navigator.vibrate(150);
     }
 
-    // envia para Google Sheets
+    // 📤 envia para Google Sheets
     enviarParaSheets(codigo);
 
     console.log("Código lido:", codigo);
+
+    // 🔒 trava por 2 segundos (evita duplicação de leitura da câmera)
+    setTimeout(() => {
+        bloqueado = false;
+    }, 2000);
 }
