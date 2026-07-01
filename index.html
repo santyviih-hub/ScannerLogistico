@@ -1,1 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Scanner Logístico</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+
+<header class="topo">
+    <h1>📦 Scanner Logístico</h1>
+    <p>Leitor de Código de Barras</p>
+</header>
+
+<main class="container">
+
+    <div class="card">
+
+        <label>Operador</label>
+
+        <input
+            type="text"
+            id="operador"
+            placeholder="Digite seu nome">
+
+        <div id="reader"></div>
+
+        <button id="btnCamera">
+            📷 Abrir Câmera
+        </button>
+
+        <div class="status">
+
+            <h3>Última leitura</h3>
+
+            <div id="resultado">
+                Aguardando leitura...
+            </div>
+
+        </div>
+
+        <div class="contador">
+
+            <span>Scans realizados</span>
+
+            <h2 id="contador">
+                0
+            </h2>
+
+        </div>
+
+    </div>
+
+</main>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<script src="scanner.js"></script>
+
+<script src="app.js"></script>
+
+</body>
+</html>
