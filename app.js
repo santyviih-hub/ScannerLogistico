@@ -1,6 +1,7 @@
-const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbxTM-k4xR7SFtNZDKBWSi3DfyVfqgy_nAO-5rGRBR0Tlz_duSrzzH6TvgpSFDoLldEQRg/exec";
+const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbw_F28RXB_ZSuIFPLcrhJ7WGRCevwRuDPqAHhQSC0HH7z5L_oXVmnPvC1pey4v0APRtbA/exec";
 
 function enviarParaSheets(codigo) {
+
     const operador = document.getElementById("operador").value || "Sem nome";
 
     const payload = {
@@ -13,12 +14,11 @@ function enviarParaSheets(codigo) {
         method: "POST",
         body: JSON.stringify(payload)
     })
-    .then(res => res.json())
+    .then(res => res.text())
     .then(data => {
-        console.log("Salvo no Sheets:", data);
+        console.log("Resposta Sheets:", data);
     })
     .catch(err => {
-        console.error("Erro ao salvar:", err);
-        alert("Erro ao enviar para o Sheets");
+        console.error("Erro ao enviar:", err);
     });
 }
