@@ -16,9 +16,21 @@ function enviarParaSheets(codigo) {
     })
     .then(res => res.text())
     .then(data => {
-        console.log("Resposta Sheets:", data);
+
+        console.log("Resposta:", data);
+
+        if (data === "DUPLICADO") {
+            alert("⚠️ Código já escaneado!");
+            return;
+        }
+
+        if (data === "OK") {
+            console.log("Salvo com sucesso");
+        }
+
     })
     .catch(err => {
         console.error("Erro ao enviar:", err);
+        alert("Erro ao enviar para Sheets");
     });
 }
