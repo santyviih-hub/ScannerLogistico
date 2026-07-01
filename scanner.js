@@ -1,12 +1,15 @@
 let html5QrCode;
 let escaneando = false;
-let bloqueado = false;
 
 const btnCamera = document.getElementById("btnCamera");
 const resultado = document.getElementById("resultado");
 const contadorEl = document.getElementById("contador");
 
 let contador = 0;
+
+// 🔥 controla duplicado por código
+let ultimoCodigo = "";
+let bloqueado = false;
 
 btnCamera.addEventListener("click", iniciarScanner);
 
@@ -17,7 +20,7 @@ async function iniciarScanner() {
         html5QrCode = new Html5Qrcode("reader");
 
         await html5QrCode.start(
-            { facingMode: "environment" }, // câmera traseira (iPhone + Android)
+            { facingMode: "environment" },
             {
                 fps: 10,
                 qrbox: 250
@@ -31,37 +34,65 @@ async function iniciarScanner() {
 
     } catch (err) {
         console.error(err);
-        alert("Erro ao abrir câmera: " + err);
+        alert("Erro câmera: " + err);
     }
 }
 
 function processarCodigo(codigo) {
 
-    if (bloqueado) return; // 🔥 impede múltiplas leituras seguidas
+    codigo = codigo.trim();
 
-    bloqueado = true;
+    // 🚫 se for o mesmo código da última leitura
+    if (codigo === ultimoCodigo) {
+        mostrarMensagem("⚠️ Já bipou esse código");
+        return;
+    }
+
+    ultimoCodigo = codigo;
 
     resultado.innerText = codigo;
 
     contador++;
     contadorEl.innerText = contador;
 
-    // 🔊 som de sucesso
+    // 🔊 bip 1 vez só
     let beep = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
     beep.play();
 
-    // 📳 vibração (Android / iPhone compatível)
     if (navigator.vibrate) {
         navigator.vibrate(150);
     }
 
-    // 📤 envia para Google Sheets
     enviarParaSheets(codigo);
 
     console.log("Código lido:", codigo);
+}
 
-    // 🔒 trava por 2 segundos (evita duplicação de leitura da câmera)
+// 📢 mensagem na tela
+function mostrarMensagem(msg) {
+
+    let el = document.getElementById("msg");
+
+    if (!el) {
+        el = document.createElement("div");
+        el.id = "msg";
+        el.style.position = "fixed";
+        el.style.bottom = "20px";
+        el.style.left = "50%";
+        el.style.transform = "translateX(-50%)";
+        el.style.background = "#ff4444";
+        el.style.color = "#fff";
+        el.style.padding = "10px 20px";
+        el.style.borderRadius = "8px";
+        el.style.fontSize = "14px";
+        el.style.zIndex = "9999";
+        document.body.appendChild(el);
+    }
+
+    el.innerText = msg;
+    el.style.display = "block";
+
     setTimeout(() => {
-        bloqueado = false;
+        el.style.display = "none";
     }, 2000);
 }
