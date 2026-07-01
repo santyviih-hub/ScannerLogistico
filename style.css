@@ -1,3 +1,4 @@
+```css
 *{
     margin:0;
     padding:0;
@@ -6,37 +7,31 @@
 }
 
 body{
-    background:#f5f5f5;
+    background:#f4f4f4;
     min-height:100vh;
 }
 
-/* ===========================
-   TOPO
-=========================== */
+/* TOPO */
 
 .topo{
     background:linear-gradient(135deg,#ff6a00,#ff8c00);
     color:#fff;
     text-align:center;
-    padding:30px;
-    box-shadow:0 4px 15px rgba(0,0,0,.2);
+    padding:28px;
+    box-shadow:0 4px 15px rgba(0,0,0,.18);
 }
 
 .topo h1{
-    font-size:32px;
+    font-size:30px;
     font-weight:bold;
-    letter-spacing:1px;
 }
 
 .topo p{
-    margin-top:10px;
-    font-size:17px;
+    margin-top:8px;
     opacity:.95;
 }
 
-/* ===========================
-   CONTAINER
-=========================== */
+/* CONTAINER */
 
 .container{
     display:flex;
@@ -45,27 +40,21 @@ body{
     padding:30px;
 }
 
-/* ===========================
-   CARD
-=========================== */
-
 .card{
     width:100%;
     max-width:520px;
     background:#fff;
-    border-radius:20px;
+    border-radius:18px;
     padding:25px;
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
 }
 
-/* ===========================
-   INPUT
-=========================== */
+/* INPUT */
 
 label{
-    font-weight:bold;
     display:block;
     margin-bottom:8px;
+    font-weight:bold;
     color:#444;
 }
 
@@ -84,65 +73,88 @@ input:focus{
     border-color:#ff6a00;
 }
 
-/* ===========================
-   ÁREA DO SCANNER
-=========================== */
+/* SCANNER */
 
 #reader{
     width:100%;
     min-height:300px;
     border:3px dashed #ff6a00;
     border-radius:15px;
-    margin-bottom:20px;
     overflow:hidden;
+    margin-bottom:20px;
     background:#fafafa;
 }
 
-/* ===========================
-   BOTÃO
-=========================== */
+/* força biblioteca html5-qrcode */
+
+#reader video{
+    border-radius:12px;
+}
+
+#reader__scan_region{
+    background:#fafafa !important;
+}
+
+#reader__dashboard{
+    background:#fff7f0 !important;
+    border-top:2px solid #ff6a00 !important;
+}
+
+#reader__dashboard button{
+    background:#ff6a00 !important;
+    color:#fff !important;
+    border:none !important;
+    border-radius:8px !important;
+}
+
+#reader__dashboard button:hover{
+    background:#e65c00 !important;
+}
+
+#reader select{
+    border:2px solid #ff6a00 !important;
+    border-radius:8px;
+    padding:8px;
+}
+
+/* BOTÃO */
 
 button{
     width:100%;
     padding:16px;
-    border:none;
-    border-radius:10px;
     background:#ff6a00;
     color:white;
+    border:none;
+    border-radius:10px;
     font-size:18px;
     font-weight:bold;
     cursor:pointer;
-    transition:.3s;
+    transition:.25s;
 }
 
 button:hover{
     background:#e65c00;
-    transform:translateY(-2px);
 }
 
-/* ===========================
-   STATUS
-=========================== */
+/* STATUS */
 
 .status{
-    margin-top:25px;
-    padding:20px;
-    background:#fff3e8;
+    margin-top:20px;
+    background:#fff4eb;
     border-left:5px solid #ff6a00;
     border-radius:10px;
+    padding:18px;
 }
 
 #resultado{
-    margin-top:10px;
+    color:#ff6a00;
     font-size:20px;
     font-weight:bold;
-    color:#ff6a00;
+    margin-top:10px;
     word-break:break-word;
 }
 
-/* ===========================
-   CONTADOR
-=========================== */
+/* CONTADOR */
 
 .contador{
     margin-top:25px;
@@ -157,48 +169,35 @@ button:hover{
 .contador h2{
     font-size:55px;
     color:#ff6a00;
-    margin-top:10px;
 }
 
-/* ===========================
-   ALERTA
-=========================== */
+/* ALERTA */
 
 #msg{
     position:fixed;
-    bottom:20px;
     left:50%;
+    bottom:20px;
     transform:translateX(-50%);
     background:#ff6a00;
     color:white;
-    padding:14px 24px;
-    border-radius:12px;
-    font-weight:bold;
-    box-shadow:0 5px 15px rgba(0,0,0,.25);
-    z-index:9999;
+    padding:15px 25px;
+    border-radius:10px;
     display:none;
+    font-weight:bold;
+    box-shadow:0 5px 20px rgba(0,0,0,.25);
+    z-index:9999;
 }
 
-/* ===========================
-   RESPONSIVO
-=========================== */
+/* RESPONSIVO */
 
 @media(max-width:600px){
-
-.card{
-    padding:18px;
-}
-
-.topo{
-    padding:22px;
-}
 
 .topo h1{
     font-size:24px;
 }
 
-.topo p{
-    font-size:15px;
+.card{
+    padding:18px;
 }
 
 button{
@@ -210,3 +209,4 @@ button{
 }
 
 }
+```
